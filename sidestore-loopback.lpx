@@ -1,18 +1,17 @@
-#!name=Roam Control & SideStore Loopback
-#!desc=把发往 10.7.0.1 与 10.7.1.1 的连接反射回本机协议栈，同时支持 Roam Control 模拟定位与 SideStore 续签。
+#!name=SideStore Loopback
+#!desc=把发往 10.7.0.1 的连接反射回本机协议栈，供 SideStore 无线续签使用。
 #!author=fox
 #!loon_version=3.5.3(1007)
 #!system=iOS
 #!type=normal
 
 [General]
-# 同时接管设备端与隧道端点地址，满足 Roam Control 与 SideStore 需求
-include-tun = 10.7.0.1/32, 10.7.1.1/32
+# 只接管 SideStore 需要的设备端地址
+include-tun = 10.7.0.1/32
 # 跳过代理防止本地回环被节点分流
-skip-proxy = 10.7.0.1, 10.7.1.1, localhost, *.local
-# 允许虚拟网卡使用 IPv6 以适配 iOS 27 设备隧道握手
+skip-proxy = 10.7.0.1, localhost, *.local
+# 与已验证可用的 SideStore 续签配置保持一致
 ipv6-vif = off
 
 [IP Rewrite]
 10.7.0.1 = reflect
-10.7.1.1 = reflect
